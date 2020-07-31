@@ -1,0 +1,360 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Cyberscomet-{{ article.title }}</title>
+    <!-- META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- CSS FILES -->
+    <link href="{% static 'src/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/featherlight.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/rrssb.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!-- READING POSITION INDICATOR -->
+<progress value="0" id="eskimo-progress-bar">
+        <span class="eskimo-progress-container">
+            <span class="eskimo-progress-bar"></span>
+        </span>
+</progress>
+<!-- SITE WRAPPER -->
+<div id="eskimo-site-wrapper">
+    <!-- MAIN CONTAINER -->
+    <main id="eskimo-main-container">
+        <div class="container">
+            <!-- SIDEBAR -->
+            <div id="eskimo-sidebar">
+                <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
+                    <!-- LOGO -->
+                    <div id="eskimo-logo-cell" class="w-100">
+                        <a class="eskimo-logo-link" href="index.html">
+                            <h1>Cyberscomet</h1>
+                        </a>
+                    </div>
+                    <!-- MENU CONTAINER -->
+                    <div id="eskimo-sidebar-cell" class="w-100">
+                        <!-- MOBILE MENU BUTTON -->
+                        <div id="eskimo-menu-toggle">目录</div>
+                        <!-- MENU -->
+                        <nav id="eskimo-main-menu" class="menu-main-menu-container">
+                            <ul class="eskimo-menu-ul">
+                                <li><a href="/index">主页</a></li>
+                                <li><a href="/article_list/1">文章</a></li>
+                                <li><a href="/about">微言</a></li>
+                                <li><a href="#">通知</a>
+                                    <ul class="sub-menu">
+                                        {% for notice in notices %}
+                                            <br><br>{{ notice.content }}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- SOCIAL MEDIA ICONS -->
+                    <div id="eskimo-social-cell" class="mt-auto w-auto">
+                        <div id="eskimo-social-inner">
+                            <ul class="eskimo-social-icons">
+                                <!--li><a href="#"><i class="fa fa-wechat"></i></a></li-->
+                                <li><a href="https://github.com/cybers-comet?tab=projects"><i class="fa fa-github"></i></a>
+                                </li>
+                                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                                <li><a href=""><i class="fa fa-steam"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- TOP ICONS -->
+            <ul class="eskimo-top-icons">
+                <li id="eskimo-panel-icon">
+                    <a href="#eskimo-panel" class="eskimo-panel-open"><i class="fa fa-bars"></i></a>
+                </li>
+                <li id="eskimo-search-icon">
+                    <a id="eskimo-open-search" href="#"><i class="fa fa-search"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <!-- PAGE TITLE -->
+            <div class="eskimo-page-title">
+                <h1><span>{{ article.title }}</span></h1>
+                <div class="eskimo-page-title-meta">
+                    <div class="eskimo-author-meta">
+                        By <a class="author-meta" href="author.html">{{ article.author }}</a>
+                    </div>
+                    <div class="eskimo-cat-meta">
+                        In <a href="category.html">{{ article.category }}</a>
+                    </div>
+                    <div class="eskimo-date-meta">{{ article.publish_time }}</div>
+                </div>
+            </div>
+            <!-- FEATURED IMAGE -->
+            <div class="eskimo-featured-img">
+                <img src="{{ article.main_photo_link }}" alt="" class="w-100"/>
+            </div>
+            <!-- POST CONTENT -->
+            <div class="eskimo-page-content">
+                <p>{{ article.content|safe }}</p>
+                <div class="clearfix"></div>
+                <!-- TAGS -->
+                <div class="eskimo-meta-tags">
+                    {% for tag in article_tags %}
+                        <span class="badge badge-default"><a href="category.html">{{ tag }}</a></span>
+                    {% endfor %}
+
+                </div>
+                <!-- Responsive Social Sharing Buttons -- https://github.com/kni-labs/rrssb -->
+                <div id="eskimo-share-buttons" class="eskimo-share-buttons">
+                    <ul class="rrssb-buttons">
+                        <!-- EMAIL -->
+                        <li class="rrssb-email">
+                            <a href="mailto:?Subject=Your%20Subject%20Here">
+                                    <span class="rrssb-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"><path
+                                                d="M21.386 2.614H2.614A2.345 2.345 0 0 0 .279 4.961l-.01 14.078a2.353 2.353 0 0 0 2.346 2.347h18.771a2.354 2.354 0 0 0 2.347-2.347V4.961a2.356 2.356 0 0 0-2.347-2.347zm0 4.694L12 13.174 2.614 7.308V4.961L12 10.827l9.386-5.866v2.347z"/></svg>
+                                    </span>
+                                <span class="rrssb-text">Email</span>
+                            </a>
+                        </li>
+                        <!-- GITHUB -->
+                        <li class="rrssb-github">
+                            <a href="https://github.com">
+                                <span class="rrssb-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 28 28"><path
+                                            d="M13.97 1.57c-7.03 0-12.733 5.703-12.733 12.74 0 5.622 3.636 10.393 8.717 12.084.637.13.87-.277.87-.615 0-.302-.013-1.103-.02-2.165-3.54.77-4.29-1.707-4.29-1.707-.578-1.473-1.413-1.863-1.413-1.863-1.154-.79.09-.775.09-.775 1.276.104 1.96 1.316 1.96 1.312 1.135 1.936 2.99 1.393 3.712 1.06.116-.823.445-1.384.81-1.704-2.83-.32-5.802-1.414-5.802-6.293 0-1.39.496-2.527 1.312-3.418-.132-.322-.57-1.617.123-3.37 0 0 1.07-.343 3.508 1.305 1.016-.282 2.105-.424 3.188-.43 1.082 0 2.167.156 3.198.44 2.43-1.65 3.498-1.307 3.498-1.307.695 1.754.258 3.043.13 3.37.815.903 1.314 2.038 1.314 3.43 0 4.893-2.978 5.97-5.814 6.286.458.388.876 1.16.876 2.358 0 1.703-.016 3.076-.016 3.482 0 .334.232.748.877.61 5.056-1.687 8.7-6.456 8.7-12.08-.055-7.058-5.75-12.757-12.792-12.75z"></path>
+                                    </svg>
+                                </span>
+                                <span class="rrssb-text">github</span>
+                            </a>
+                        </li>
+                        <!-- Printer -->
+                        <li class="rrssb-print">
+                            <a href="javascript:window.print()">
+                                <span class="rrssb-icon">
+                                    <svg viewbox="0 0 24 24"><path fill="#000000"
+                                                                   d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z"></path>
+                                    </svg>
+                                </span>
+                                <span class="rrssb-text">print</span>
+                            </a>
+                        </li>
+                        <!-- Hackernews -->
+                        <li class="rrssb-hackernews">
+                            <a href="https://news.ycombinator.com/submitlink?u=http://www.kurtnoble.com/labs/rrssb/&amp;t=Check%20out%20how%20ridiculously%20responsive%20these%20social%20buttons%20are&amp;text=Check%20out%20how%20ridiculously%20responsive%20these%20social%20buttons%20are">
+                                <span class="rrssb-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 28 28"><path
+                                            fill="#FFF"
+                                            d="M14 13.626l-4.508-9.19H6.588l6.165 12.208v6.92h2.51v-6.92l6.15-12.21H18.69"></path>
+                                    </svg>
+                                </span>
+                                <span class="rrssb-text">hackernews</span>
+                            </a>
+                        </li>
+                        <!-- GetPocker -->
+                        <li class="rrssb-pocket">
+                            <a href="https://getpocket.com/save?url=http://kurtnoble.com/labs/rrssb/index.html">
+                                <span class="rrssb-icon">
+                                    <svg width="32" height="28" viewbox="0 0 32 28" xmlns="http://www.w3.org/2000/svg"><path
+                                            d="M28.782.002c2.03.002 3.193 1.12 3.182 3.106-.022 3.57.17 7.16-.158 10.7-1.09 11.773-14.588 18.092-24.6 11.573C2.72 22.458.197 18.313.057 12.937c-.09-3.36-.05-6.72-.026-10.08C.04 1.113 1.212.016 3.02.008 7.347-.006 11.678.004 16.006.002c4.258 0 8.518-.004 12.776 0zM8.65 7.856c-1.262.135-1.99.57-2.357 1.476-.392.965-.115 1.81.606 2.496 2.453 2.334 4.91 4.664 7.398 6.966 1.086 1.003 2.237.99 3.314-.013 2.407-2.23 4.795-4.482 7.17-6.747 1.203-1.148 1.32-2.468.365-3.426-1.01-1.014-2.302-.933-3.558.245-1.596 1.497-3.222 2.965-4.75 4.526-.706.715-1.12.627-1.783-.034-1.597-1.596-3.25-3.138-4.93-4.644-.47-.42-1.123-.647-1.478-.844z"></path>
+                                    </svg>
+                                </span>
+                                <span class="rrssb-text">pocket</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <hr/>
+                <!-- COMMENTS -->
+                <div id="eskimo-comments-wrapper">
+                    <div id="eskimo_comments_block" class="eskimo_comments_block">
+                        <h3 class="eskimo-title-with-border">
+                            <span>评论</span>
+                        </h3>
+                        <div class="eskimo_commentlist">
+                            {% if article_comments %}
+                                {% for comment in article_comments %}
+                                    <!-- COMMENT 1 -->
+                                    <div class="eskimo_comment_wrapper">
+                                        <div class="eskimo_comments">
+                                            <div class="eskimo_comment">
+                                                <div class="eskimo_comment_inner">
+                                                    <div class="eskimo_comment_left">
+                                                        <img alt=''
+                                                             src='{% static 'src/images/user.jpg' %}'/>
+                                                    </div>
+                                                    <div class="eskimo_comment_right">
+                                                        <div class="eskimo_comment_right_inner ">
+                                                            <cite class="eskimo_fn">
+                                                                <a href=''>{{ comment.publisher_name }}</a>
+                                                            </cite>
+                                                            <div class="eskimo_comment_links">
+                                                                <i class="fa fa-clock-o"></i> {{ comment.publish_time }}
+                                                                <a
+                                                                        href="#"></a>
+                                                            </div>
+                                                            <div class="eskimo_comment_text">
+                                                                <p>{{ comment.content }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <h4 class="eskimo-title-with-border"><span>还没有评论哦，快来抢沙发吧>o<</span></h4>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div id="eskimo_comment_form" class="eskimo_comment_form">
+                        <h3>回复</h3>
+                        <form action="/article_detail/{{ article.id }}" method="post" id="commentform">
+                            {% csrf_token %}
+                            <p><strong>昵称:</strong></p>
+                            <input type="text" name="publisher_name" id="publisher_name" class="form-control" placeholder="路过的小同志"
+                                   required="required" maxlength="50">
+                            <br>
+                            <p><strong>内容:</strong></p>
+                            <p><textarea id="content" name="content" cols="45" rows="8" required="required"></textarea>
+                            </p>
+                            <input name="submit" type="submit" id="submit" class="btn btn-default"
+                                   value="提交"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <footer id="eskimo-footer">
+        <div class="container">
+            <div class="row eskimo-footer-wrapper">
+                <!-- FOOTER WIDGET 1 -->
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <h5 class="eskimo-title-with-border"><span>关于</span></h5>
+                    <p><strong>Cyberscomet</strong><br><strong>一个web菜鸟,求大师傅带飞.(。•ˇ‸•。)</strong><br></p>
+                    <p><a href="/about" class="btn btn-default">更多...</a></p>
+                </div>
+                <!-- FOOTER WIDGET 2 -->
+                <div class="col-12 col-lg-6">
+                    <h5 class="eskimo-title-with-border"><span>RSS订阅(暂未开通23333)</span></h5>
+                    <form method="post" action="/index">
+                        <label><strong>gkd订阅Cyberscomet吧！</strong></label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="EMAIL" placeholder="你的邮箱地址"
+                                   required/>
+                            <div class="input-group-append">
+                                <input type="submit" value="订阅" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- CREDITS -->
+            <div class="eskimo-footer-credits">
+                <p>
+                    <strong>Made by CybersComet.Powered By Python Django.</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- GO TO TOP BUTTON -->
+<a id="eskimo-gototop" href="#"><i class="fa fa-chevron-up"></i></a>
+<!-- SLIDE PANEL OVERLAY -->
+<div id="eskimo-overlay"></div>
+<!-- SLIDE PANEL -->
+<div id="eskimo-panels">
+    <aside id="eskimo-panel" class="eskimo-panel">
+        <div class="eskimo-panel-inner">
+            <!-- CLOSE SLIDE PANEL BUTTON -->
+            <a href="#" class="eskimo-panel-close"><i class="fa fa-times"></i></a>
+            <!-- AUTHOR BOX -->
+            <div class="eskimo-author-box eskimo-widget">
+                <div class="eskimo-author-img">
+                    <img src="{% static 'src/images/Cyberscomet.jpg' %}" alt="JOHN DOE"/>
+                </div>
+                <h3><span>Cyberscomet</span></h3>
+                <p class="eskimo-author-subtitle">WEB CTFER &amp; DEVELOPER</p>
+                <p class="eskimo-author-description">I'm a Pythoner, CTFer and Designer<br>I 'm 一个web菜鸟<br>萌新成长中</p>
+                <div class="eskimo-author-box-btn">
+                    <a class="btn btn-default" href="about.html">和我联系</a>
+                </div>
+            </div>
+            <!-- RECENT POSTS -->
+            <div class="eskimo-recent-entries eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>最近发布</span></h5>
+                <ul>
+                    {% for article in order_articles %}
+                        <li>
+                            <a href="/article_detail/{{ article.id }}">{{ article.title }}</a>
+                            <span class="post-date">{{ article.publish_time }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- CATEGORIES -->
+            <div class="eskimo-categories eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>分类</span></h5>
+                <ul>
+                    {% for category in categories %}
+                        <li>
+                            <a href="" title="#">{{ category.name }}</a> <span
+                                class="badge badge-pill badge-default">{{ category.id }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- TAGS -->
+            <div class="eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>标签</span></h5>
+                <div class="eskimo-tag-cloud">
+                    {% for tag in tags %}
+                        <a href="">{{ tag.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+<!-- FULLSCREEN SEARCH -->
+<div id="eskimo-fullscreen-search">
+    <div id="eskimo-fullscreen-search-content">
+        <h3>暂未开放哦</h3>
+        <a href="#" id="eskimo-close-search"><i class="fa fa-times"></i></a>
+        <form role="search" method="get" action="" class="eskimo-lg-form">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="Enter a keyword..." name="s"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--留言成功提示-->
+{% if result %}
+    <script>alert('留言成功！>o<')</script>
+{% endif %}
+<!-- JS FILES -->
+<script src="{% static 'src/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'src/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'src/js/salvattore.min.js' %}"></script>
+<script src="{% static 'src/js/panel.js' %}"></script>
+<script src="{% static 'src/js/reading-position-indicator.js' %}"></script>
+<script src="{% static 'src/js/rrssb.min.js' %}"></script>
+<script src="{% static 'src/js/featherlight.js' %}"></script>
+<script src="{% static 'src/js/custom.js' %}"></script>
+</body>
+</html>
+

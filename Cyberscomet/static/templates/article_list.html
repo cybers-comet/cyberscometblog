@@ -1,0 +1,271 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Cyberscomet</title>
+    <!-- META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- CSS FILES -->
+    <link href="{% static 'src/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!-- READING POSITION INDICATOR -->
+<progress value="0" id="eskimo-progress-bar">
+        <span class="eskimo-progress-container">
+            <span class="eskimo-progress-bar"></span>
+        </span>
+</progress>
+<!-- SITE WRAPPER -->
+<div id="eskimo-site-wrapper">
+    <!-- MAIN CONTAINER -->
+    <main id="eskimo-main-container">
+        <div class="container">
+            <!-- SIDEBAR -->
+            <div id="eskimo-sidebar">
+                <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
+                    <!-- LOGO -->
+                    <div id="eskimo-logo-cell" class="w-100">
+                        <a class="eskimo-logo-link" href="index.html">
+                            <h1>Cyberscomet</h1>
+                        </a>
+                    </div>
+                    <!-- MENU CONTAINER -->
+                    <div id="eskimo-sidebar-cell" class="w-100">
+                        <!-- MOBILE MENU BUTTON -->
+                        <div id="eskimo-menu-toggle">目录</div>
+                        <!-- MENU -->
+                        <nav id="eskimo-main-menu" class="menu-main-menu-container">
+                            <ul class="eskimo-menu-ul">
+                                <li><a href="/index">主页</a></li>
+                                <li><a href="/article_list/1">文章</a></li>
+                                <li><a href="/about">微言</a></li>
+                                <li><a href="#">通知</a>
+                                    <ul class="sub-menu">
+                                        {% for notice in notices %}
+                                            <br><br>{{ notice.content }}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- SOCIAL MEDIA ICONS -->
+                    <div id="eskimo-social-cell" class="mt-auto w-auto">
+                        <div id="eskimo-social-inner">
+                            <ul class="eskimo-social-icons">
+                                <!--li><a href="#"><i class="fa fa-wechat"></i></a></li-->
+                                <li><a href="https://github.com/cybers-comet?tab=projects"><i class="fa fa-github"></i></a>
+                                </li>
+                                <li><a href=""><i class="fa fa-qq"></i></a></li>
+                                <li><a href=""><i class="fa fa-steam"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- TOP ICONS -->
+            <ul class="eskimo-top-icons">
+                <li id="eskimo-panel-icon">
+                    <a href="#eskimo-panel" class="eskimo-panel-open"><i class="fa fa-bars"></i></a>
+                </li>
+                <li id="eskimo-search-icon">
+                    <a id="eskimo-open-search" href=""><i class="fa fa-search"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <!-- PAGE TITLE -->
+            <div class="eskimo-page-title">
+                <h1 class="no-border">文章</h1>
+            </div>
+            <!-- BLOG POSTS -->
+            <!-- POST 1 -->
+            {% for article in article_list %}
+                <div class="card card-horizontal">
+                    <div class="card-body">
+                        <div class="card-horizontal-left">
+                            <div class="card-category">
+                                <a href="/article_detail/{{ article.id }}">{{ article.category }}</a>
+                            </div>
+                            <h3 class="card-title"><a href="/article_detail/{{ article.id }}">{{ article.title }}</a>
+                            </h3>
+                            <div class="card-excerpt">
+                                <p>{{ article.description }}</p>
+                            </div>
+                            <div class="card-horizontal-meta">
+                                <div class="eskimo-author-meta">
+                                    By <a class="author-meta"
+                                          href="/article_detail/{{ article.id }}">{{ article.author }}</a>
+                                </div>
+                                <div class="eskimo-date-meta">
+                                    <a href="/article_detail/{{ article.id }}">{{ article.publish_time }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-horizontal-right" data-img="{{ article.main_photo_link }}">
+                            <a class="card-featured-img" href="/article_detail/{{ article.id }}"></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- PAGINATION -->
+            <div class="eskimo-pager">
+                <ul class='pagination flex-wrap'>
+                    {% if article_list.has_previous %}
+                        <li class='page-item'><a class='page-link'
+                                                 href="/article_list/{{ article_list.previous_page_number }}"><i
+                                class="fa fa-chevron-left"></i></a></li>
+                    {% else %}
+                        <li class='page-item active'><a class='page-link'
+                                                        href="/article_list/1"><i
+                                class="fa fa-chevron-left"></i></a></li>
+                    {% endif %}
+                    {% for num in article_list.paginator.page_range %}
+                        {% if num %}
+                            {% ifequal num article_list.number %}
+                                <li class='page-item active'><a class='page-link' href=''>{{ num }}</a></li>
+                            {% else %}
+                                <li class='page-item '><a class='page-link'
+                                                          href='/article_list/{{ num }}'>{{ num }}</a>
+                                </li>
+                            {% endifequal %}
+                        {% else %}
+                            <li class='page-item active'><a class='page-link' href='#'>...</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if article_list.has_next %}
+                        <li class='page-item'><a class='page-link'
+                                                 href='/article_list/{{ article_list.next_page_number }}'><i
+                                class="fa fa-chevron-right"></i></a></li>
+                    {% else %}
+                        <li class='page-item active'><a class='page-link' href=""><i
+                                class="fa fa-chevron-right"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <footer id="eskimo-footer">
+        <div class="container">
+            <div class="row eskimo-footer-wrapper">
+                <!-- FOOTER WIDGET 1 -->
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <h5 class="eskimo-title-with-border"><span>关于</span></h5>
+                    <p><strong>Cyberscomet</strong><br><strong>一个web菜鸟,求大师傅带飞.(。•ˇ‸•。)</strong><br></p>
+                    <p><a href="/about" class="btn btn-default">更多...</a></p>
+                </div>
+                <!-- FOOTER WIDGET 2 -->
+                <div class="col-12 col-lg-6">
+                    <h5 class="eskimo-title-with-border"><span>RSS订阅(暂未开通23333)</span></h5>
+                    <form method="post" action="index.html">
+                        <label><strong>gkd订阅Cyberscomet吧！</strong></label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="EMAIL" placeholder="你的邮箱地址"
+                                   required/>
+                            <div class="input-group-append">
+                                <input type="submit" value="订阅" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- CREDITS -->
+            <div class="eskimo-footer-credits">
+                <p>
+                    <strong>Made by CybersComet.Powered By Python Django.</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- GO TO TOP BUTTON -->
+<a id="eskimo-gototop" href="#"><i class="fa fa-chevron-up"></i></a>
+<!-- SLIDE PANEL OVERLAY -->
+<div id="eskimo-overlay"></div>
+<!-- SLIDE PANEL -->
+<div id="eskimo-panels">
+    <aside id="eskimo-panel" class="eskimo-panel">
+        <div class="eskimo-panel-inner">
+            <!-- CLOSE SLIDE PANEL BUTTON -->
+            <a href="#" class="eskimo-panel-close"><i class="fa fa-times"></i></a>
+            <!-- AUTHOR BOX -->
+            <div class="eskimo-author-box eskimo-widget">
+                <div class="eskimo-author-img">
+                    <img src="{% static 'src/images/Cyberscomet.jpg' %}" alt="JOHN DOE"/>
+                </div>
+                <h3><span>Cyberscomet</span></h3>
+                <p class="eskimo-author-subtitle">WEB CTFER &amp; DEVELOPER</p>
+                <p class="eskimo-author-description">I'm a Pythoner, CTFer and Designer<br>I 'm 一个web菜鸟<br>萌新成长中</p>
+                <div class="eskimo-author-box-btn">
+                    <a class="btn btn-default" href="about.html">和我联系</a>
+                </div>
+            </div>
+            <!-- RECENT POSTS -->
+            <div class="eskimo-recent-entries eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>最近发布</span></h5>
+                <ul>
+                    {% for article in order_articles %}
+                        <li>
+                            <a href="/article_detail/{{ article.id }}">{{ article.title }}</a>
+                            <span class="post-date">{{ article.publish_time }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- CATEGORIES -->
+            <div class="eskimo-categories eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>分类</span></h5>
+                <ul>
+                    {% for category in categories %}
+                        <li>
+                            <a href="" title="#">{{ category.name }}</a> <span
+                                class="badge badge-pill badge-default">{{ category.id }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- TAGS -->
+            <div class="eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>标签</span></h5>
+                <div class="eskimo-tag-cloud">
+                    {% for tag in tags %}
+                        <a href="">{{ tag.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+<!-- FULLSCREEN SEARCH -->
+<div id="eskimo-fullscreen-search">
+    <div id="eskimo-fullscreen-search-content">
+        <h3>暂未开放哦</h3>
+        <a href="#" id="eskimo-close-search"><i class="fa fa-times"></i></a>
+        <form role="search" method="get" action="" class="eskimo-lg-form">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="Enter a keyword..." name="s"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- JS FILES -->
+<script src="{% static 'src/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'src/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'src/js/panel.js' %}"></script>
+<script src="{% static 'src/js/reading-position-indicator.js' %}"></script>
+<script src="{% static 'src/js/custom.js' %}"></script>
+</body>
+</html>

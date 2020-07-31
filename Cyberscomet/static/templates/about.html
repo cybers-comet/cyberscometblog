@@ -1,0 +1,295 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Cyberscomet</title>
+    <!-- META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- CSS FILES -->
+    <link href="{% static 'src/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/featherlight.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!-- READING POSITION INDICATOR -->
+<progress value="0" id="eskimo-progress-bar">
+        <span class="eskimo-progress-container">
+            <span class="eskimo-progress-bar"></span>
+        </span>
+</progress>
+<!-- SITE WRAPPER -->
+<div id="eskimo-site-wrapper">
+    <!-- MAIN CONTAINER -->
+    <main id="eskimo-main-container">
+        <div class="container">
+            <!-- SIDEBAR -->
+            <div class="container">
+                <!-- SIDEBAR -->
+                <div id="eskimo-sidebar">
+                    <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
+                        <!-- LOGO -->
+                        <div id="eskimo-logo-cell" class="w-100">
+                            <a class="eskimo-logo-link" href="index.html">
+                                <h1>Cyberscomet</h1>
+                            </a>
+                        </div>
+                        <!-- MENU CONTAINER -->
+                        <div id="eskimo-sidebar-cell" class="w-100">
+                            <!-- MOBILE MENU BUTTON -->
+                            <div id="eskimo-menu-toggle">目录</div>
+                            <!-- MENU -->
+                            <nav id="eskimo-main-menu" class="menu-main-menu-container">
+                                <ul class="eskimo-menu-ul">
+                                    <li><a href="/index">主页</a></li>
+                                    <li><a href="/article_list/1">文章</a></li>
+                                    <li><a href="/about">微言</a></li>
+                                    <li><a href="#">通知</a>
+                                        <ul class="sub-menu">
+                                            {% for notice in notices %}
+                                                <br><br>{{ notice.content }}
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- SOCIAL MEDIA ICONS -->
+                        <div id="eskimo-social-cell" class="mt-auto w-auto">
+                            <div id="eskimo-social-inner">
+                                <ul class="eskimo-social-icons">
+                                    <!--li><a href="#"><i class="fa fa-wechat"></i></a></li-->
+                                    <li><a href="https://github.com/cybers-comet?tab=projects"><i
+                                            class="fa fa-github"></i></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-qq"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-steam"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- TOP ICONS -->
+                <ul class="eskimo-top-icons">
+                    <li id="eskimo-panel-icon">
+                        <a href="#eskimo-panel" class="eskimo-panel-open"><i class="fa fa-bars"></i></a>
+                    </li>
+                    <li id="eskimo-search-icon">
+                        <a id="eskimo-open-search" href="#"><i class="fa fa-search"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <!-- PAGE TITLE -->
+                <div class="eskimo-page-title">
+                    <h1><span>Cyberscomet</span></h1>
+                    <p class="eskimo-page-subtitle">Web Designer &amp; CTFer &amp; PPSUCer</p>
+                </div>
+                <!-- ABOUT ME -->
+                <div class="row">
+                    <div class="col-12 col-lg-7 order-2 order-lg-1">
+                        <p>欢迎来到Cyberscomet,<br>一个热爱计算机技术的菜鸟的空间,<br>安全爱好者,<br>人生苦短,我选Python,
+                            <br>果粉一枚,<br>索尼大法好,<br>等待赛博朋克2077和PS5 ing</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 100%" role="progressbar"
+                                 aria-valuenow="100"
+                                 aria-valuemin="0" aria-valuemax="100"><span>Python</span> 100%
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" style="width: 85%" role="progressbar" aria-valuenow="85"
+                                 aria-valuemin="0" aria-valuemax="100"><span>Django开发</span> 85%
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: 65%" role="progressbar"
+                                 aria-valuenow="65"
+                                 aria-valuemin="0" aria-valuemax="100"><span>爬虫</span> 65%
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: 65%" role="progressbar"
+                                 aria-valuenow="65"
+                                 aria-valuemin="0" aria-valuemax="100"><span>数据恢复</span> 65%
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" style="width: 50%" role="progressbar" aria-valuenow="50"
+                                 aria-valuemin="0" aria-valuemax="100"><span>Web安全</span> 50%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 order-1 order-lg-2 mb-5 mb-lg-0">
+                        <img src="{% static 'src/images/Cyberscomet.jpg' %}" alt="Jane Doe"
+                             class="img-fluid mx-auto d-block eskimo-img-shadow"/>
+                    </div>
+                </div>
+                <!-- DIVIDER -->
+                <hr/>
+                <h2>给我留言</h2>
+                <p></p>
+                <!-- CONTACT FORM -->
+                <div id="eskimo_comment_form" class="eskimo_comment_form">
+                    <form action="/about/" method="POST" id="messageform">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <p>
+                                    <label>你的名字:</label><br/>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="路过的小同志"
+                                           required="required" maxlength="50"/>
+                                </p>
+                                <p>
+                                    <label>邮箱地址:</label><br/>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="你的邮箱地址"
+                                           required="required" maxlength="50"/>
+                                </p>
+                                <p>
+                                    <label>联络方式:</label><br/>
+                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="可不填写"
+                                           maxlength="50"/>
+                                </p>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <p>
+                                    <label>内容:</label><br/>
+                                    <textarea name="content" id="content" required="required"
+                                              class="form-control form-fixed-height"></textarea>
+                                </p>
+                                <button id="sendbutton" type="submit" class="btn btn-lg w-100">发送消息</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <footer id="eskimo-footer">
+        <div class="container">
+            <div class="row eskimo-footer-wrapper">
+                <!-- FOOTER WIDGET 1 -->
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <h5 class="eskimo-title-with-border"><span>关于</span></h5>
+                    <p><strong>CybersComet</strong><br><strong>一个web菜鸟,求大师傅带飞.(。•ˇ‸•。)</strong><br></p>
+                    <p><a href="/about/" class="btn btn-default">更多...</a></p>
+                </div>
+                <!-- FOOTER WIDGET 2 -->
+                <div class="col-12 col-lg-6">
+                    <h5 class="eskimo-title-with-border"><span>RSS订阅(暂未开通23333)</span></h5>
+                    <form method="post" action="index.html">
+                        <label><strong>gkd订阅Cyberscomet吧！</strong></label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" name="EMAIL" placeholder="你的邮箱地址"
+                                   required/>
+                            <div class="input-group-append">
+                                <input type="submit" value="订阅" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- CREDITS -->
+            <div class="eskimo-footer-credits">
+                <p>
+                    <strong>Made by CybersComet.Powered By Python Django.</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- GO TO TOP BUTTON -->
+<a id="eskimo-gototop" href="#"><i class="fa fa-chevron-up"></i></a>
+<!-- SLIDE PANEL OVERLAY -->
+<div id="eskimo-overlay"></div>
+<!-- SLIDE PANEL -->
+<div id="eskimo-panels">
+    <aside id="eskimo-panel" class="eskimo-panel">
+        <div class="eskimo-panel-inner">
+            <!-- CLOSE SLIDE PANEL BUTTON -->
+            <a href="#" class="eskimo-panel-close"><i class="fa fa-times"></i></a>
+            <!-- AUTHOR BOX -->
+            <div class="eskimo-author-box eskimo-widget">
+                <div class="eskimo-author-img">
+                    <img src="{% static 'src/images/Cyberscomet.jpg' %}" alt="JOHN DOE"/>
+                </div>
+                <h3><span>Cyberscomet</span></h3>
+                <p class="eskimo-author-subtitle">WEB CTFER &amp; DEVELOPER</p>
+                <p class="eskimo-author-description">I'm a Pythoner, CTFer and Designer<br>I 'm 一个web菜鸟<br>萌新成长中</p>
+                <div class="eskimo-author-box-btn">
+                    <a class="btn btn-default" href="about.html">和我联系</a>
+                </div>
+            </div>
+            <!-- RECENT POSTS -->
+            <div class="eskimo-recent-entries eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>最近发布</span></h5>
+                <ul>
+                    {% for article in order_articles %}
+                        <li>
+                            <a href="/article_detail/{{ article.id }}">{{ article.title }}</a>
+                            <span class="post-date">{{ article.publish_time }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- CATEGORIES -->
+            <div class="eskimo-categories eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>分类</span></h5>
+                <ul>
+                    {% for category in categories %}
+                        <li>
+                            <a href="" title="#">{{ category.name }}</a> <span
+                                class="badge badge-pill badge-default">{{ category.id }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- TAGS -->
+            <div class="eskimo-widget">
+                <h5 class="eskimo-title-with-border"><span>标签</span></h5>
+                <div class="eskimo-tag-cloud">
+                    {% for tag in tags %}
+                        <a href="">{{ tag.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+<!-- FULLSCREEN SEARCH -->
+<div id="eskimo-fullscreen-search">
+    <div id="eskimo-fullscreen-search-content">
+        <h3>暂未开放哦</h3>
+        <a href="#" id="eskimo-close-search"><i class="fa fa-times"></i></a>
+        <form role="search" method="get" action="" class="eskimo-lg-form">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="Enter a keyword..." name="s"/>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--success-->
+{% if result %}
+    <script>alert('留言成功！>o<')</script>
+{% endif %}
+<!-- JS FILES -->
+<script src="{% static 'src/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'src/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'src/js/salvattore.min.js' %}"></script>
+<script src="{% static 'src/js/panel.js' %}"></script>
+<script src="{% static 'src/js/reading-position-indicator.js' %}"></script>
+<script src="{% static 'src/js/featherlight.js' %}"></script>
+<script src="{% static 'src/js/ajax-contact-form.js' %}"></script>
+<script src="{% static 'src/js/custom.js' %}"></script>
+</body>
+
+</html>
